@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <ctype.h>
+
 int gameField[9][9];
 
 // 0 equals false
@@ -12,8 +14,7 @@ void setGameField() {
     }
 }
 
-
-void Draw(char playerName[]){
+void draw(char playerName[]){
     printf("Player: %s\n", playerName);
     //print the columne number
     printf("   ABC DEF GHI\n");
@@ -53,14 +54,46 @@ int gameEnded() {
 
 int main() {
     int gameFinished = 0;
-    char playerName[15]={};
+    int validInput = 0;
+    char playerName[20];
+    char column;
+    int row;
+    int inputVal;
     setGameField();
-    printf("Please enter your name:");
-    scanf("%20s", playerName);
-
+    //If incorrect input ask again
+    do{
+        printf("Please enter your name:");
+    } while (scanf("%s", &playerName) == 0);
+    getchar();
     //This will go one as long as the game is not finished
     while (0 == gameFinished){
-        Draw(playerName);
+        draw(playerName);
+        printf("Please enter your column then row and then your input value:\n");
+        //Check if the input is correct
+        while (validInput == 0) {
+            scanf("%c%d%d",&column,&row,&inputVal);
+            getchar();
+            if (inputVal <= 9){
+                if (row <= 9){
+                    if(tolower(column) <= 'i'){
+                        validInput=1;
+                    } else {
+                        printf("Incorrect column: %c\n",column);
+                        printf("Pleas enter again:\n");
+                    }
+                } else {
+                    printf("Incorrect row: %d\n",row);
+                    printf("Pleas enter again:\n");
+                }
+            }else{
+                printf("Incorrect inputValue: %d\n",inputVal);
+                printf("Pleas enter again:\n");
+            }
+        }
+
+        printf("%c %d %d\n",column,row,inputVal);
+
+
         if(gameEnded() == 1){
             gameFinished = 1;
         }
