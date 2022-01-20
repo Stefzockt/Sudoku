@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <ctype.h>
-
-int gameField[9][9];
-
 // 0 equals false
 // 1 equals true
+
+//Globals
+int gameField[9][9];
 
 void setGameField() {
     for (int x =0;x <= 9; x++) {
