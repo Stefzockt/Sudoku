@@ -1,9 +1,5 @@
 #include <stdio.h>
-#include <math.h>
-#include <ctype.h>
-
 int gameField[9][9];
-#define LENGTH(array) (sizeof(array)/sizeof(array[0]))
 
 // 0 equals false
 // 1 equals true
@@ -19,17 +15,17 @@ void setGameField() {
 
 void Draw(char playerName[]){
     printf("Player: %s\n", playerName);
-
+    //print the columne number
     printf("   ABC DEF GHI\n");
-    for(int i = 0; i < 9; i++){
-        if(i%3==0){
+    for(int x = 0; x < 9; x++){
+        if(x%3==0){
             printf("   --- --- ---\n");
         }
-
-        printf("%d ", i+1); // line numbers
-        for(int j = 0; j < 9; j++){
-            int value = gameField[i][j];
-            if(j%3==0){
+        //print the left row number
+        printf("%d ", x+1);
+        for(int y = 0; y < 9; y++){
+            int value = gameField[x][y];
+            if(y%3==0){
                 printf("|");
             }
             if(value == 0){
@@ -43,6 +39,18 @@ void Draw(char playerName[]){
     printf("   --- --- ---\n");
 }
 
+int gameEnded() {
+    for(int x = 0; x < 9; x++){
+        for (int y = 0; y < 9; y++){
+            if(gameField[x][y]='*'){
+                return 0;
+            }else{
+                return 1;
+            }
+        }
+    }
+}
+
 int main() {
     int gameFinished = 0;
     char playerName[15]={};
@@ -53,6 +61,9 @@ int main() {
     //This will go one as long as the game is not finished
     while (0 == gameFinished){
         Draw(playerName);
+        if(gameEnded() == 1){
+            gameFinished = 1;
+        }
         gameFinished = 1;
     }
     printf("Game Finished");
