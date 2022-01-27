@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/SMoser/CLionProjects/Sudoku/cmake-build-debug",
-		"source" : "C:/Users/SMoser/CLionProjects/Sudoku"
+		"build" : "C:/Projects/C/Sudoku/cmake-build-debug",
+		"source" : "C:/Projects/C/Sudoku"
 	},
 	"version" : 
 	{

@@ -3,8 +3,11 @@
 // 0 equals false
 // 1 equals true
 
+#define LEN(array) (sizeof(array)/sizeof(array[0]))
+
 //Globals
 int gameField[9][9];
+static char alphabet[9] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'};
 
 void setGameField() {
     for (int x =0;x <= 9; x++) {
@@ -41,63 +44,64 @@ void draw(char playerName[]){
 }
 
 int gameEnded() {
+    int max = 81;
+    int current;
     for(int x = 0; x < 9; x++){
         for (int y = 0; y < 9; y++){
-            if(gameField[x][y]='*'){
-                return 0;
+            if(gameField[x][y]=='0'){
+                current++;
             }else{
-                return 1;
+                return 0;
             }
         }
+    }
+    if (current == max) {
+        return 1;
     }
 }
 
 int main() {
-    int gameFinished = 0;
-    int validInput = 0;
     char playerName[20];
     char column;
     int row;
     int inputVal;
+
     setGameField();
+
     //If incorrect input ask again
     do{
         printf("Please enter your name:");
     } while (scanf("%s", &playerName) == 0);
     getchar();
+
     //This will go one as long as the game is not finished
-    while (0 == gameFinished){
+    while (0 == gameEnded()){
         draw(playerName);
         printf("Please enter your column then row and then your input value:\n");
         //Check if the input is correct
-        while (validInput == 0) {
-            scanf("%c%d%d",&column,&row,&inputVal);
-            getchar();
-            if (inputVal <= 9){
-                if (row <= 9){
-                    if(tolower(column) <= 'i'){
-                        validInput=1;
-                    } else {
-                        printf("Incorrect column: %c\n",column);
-                        printf("Pleas enter again:\n");
+        scanf("%c%d%d",&column,&row,&inputVal);
+        getchar();
+        if (inputVal <= 9){
+            if (row <= 9){
+                row--; //We start counting from zero and the sudoku starts from 1 so we need to subtract 1.
+                if(tolower(column) <= 'i'){
+                    for (int i = 0; i < LEN(alphabet); i++){
+                        if (toupper(column) == alphabet[i]){
+                            gameField[row][i] = inputVal;
+                        }
                     }
                 } else {
-                    printf("Incorrect row: %d\n",row);
+                    printf("Incorrect column: %c\n",column);
                     printf("Pleas enter again:\n");
                 }
-            }else{
-                printf("Incorrect inputValue: %d\n",inputVal);
+            } else {
+                printf("Incorrect row: %d\n",row);
                 printf("Pleas enter again:\n");
             }
+        }else{
+            printf("Incorrect inputValue: %d\n",inputVal);
+            printf("Pleas enter again:\n");
         }
-
-        printf("%c %d %d\n",column,row,inputVal);
-
-
-        if(gameEnded() == 1){
-            gameFinished = 1;
-        }
-        gameFinished = 1;
     }
     printf("Game Finished");
     return 0;

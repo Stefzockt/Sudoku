@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/Users/SMoser/CLionProjects/Sudoku/cmake-build-debug"
+			"value" : "c:/Projects/C/Sudoku/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -539,7 +539,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/SMoser/CLionProjects/Sudoku"
+			"value" : "C:/Projects/C/Sudoku"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -1159,7 +1159,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/SMoser/CLionProjects/Sudoku/cmake-build-debug"
+			"value" : "C:/Projects/C/Sudoku/cmake-build-debug"
 		},
 		{
 			"name" : "Sudoku_IS_TOP_LEVEL",
@@ -1183,7 +1183,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/SMoser/CLionProjects/Sudoku"
+			"value" : "C:/Projects/C/Sudoku"
 		}
 	],
 	"kind" : "cache",

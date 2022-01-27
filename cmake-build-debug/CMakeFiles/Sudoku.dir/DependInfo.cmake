@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "C:/Users/SMoser/CLionProjects/Sudoku/main.c" "CMakeFiles/Sudoku.dir/main.c.obj" "gcc" "CMakeFiles/Sudoku.dir/main.c.obj.d"
+  "C:/Projects/C/Sudoku/main.c" "CMakeFiles/Sudoku.dir/main.c.obj" "gcc" "CMakeFiles/Sudoku.dir/main.c.obj.d"
   )
 
 # Targets to which this target links.
