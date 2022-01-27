@@ -6,7 +6,7 @@
 *.ko
 *.obj
 *.elf
-./cmake-build-debug/
+./cmake-build-debug/*
 
 # Linker output
 *.ilk
