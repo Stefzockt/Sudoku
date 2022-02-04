@@ -82,7 +82,6 @@ int checkAllRules(int row, int column, int value){
     return 0;
 }
 
-//Removes the Numbers of the Array and puts a 0 in there
 void removeKNumbers(int nonhiddennumbers){
     int count = 81-nonhiddennumbers;
     while (count != 0)
@@ -105,46 +104,45 @@ void removeKNumbers(int nonhiddennumbers){
     }
 }
 
-//An algorithmen which fills all the remaining numbers
-int fillRemaining(int x, int y){
-    if (y >= 9 && x < 9 - 1)
+int fillRemaining(int i, int j){
+    if (j>=9 && i<9-1)
     {
-        x = x + 1;
-        y = 0;
+        i = i + 1;
+        j = 0;
     }
-    if (x >= 9 && y >= 9)
+    if (i>=9 && j>=9)
         return 1;
 
-    if (x < 3)
+    if (i < 3)
     {
-        if (y < 3)
-            y = 3;
+        if (j < 3)
+            j = 3;
     }
-    else if (x < 9 - 3)
+    else if (i < 9-3)
     {
-        if (y == (int)(x / 3) * 3)
-            y = y + 3;
+        if (j==(int)(i/3)*3)
+            j =  j + 3;
     }
     else
     {
-        if (y == 9 - 3)
+        if (j == 9-3)
         {
-            x = x + 1;
-            y = 0;
-            if (x >= 9)
+            i = i + 1;
+            j = 0;
+            if (i>=9)
                 return 1;
         }
     }
 
     for (int value = 1; value<=9; value++)
     {
-        if (checkAllRulesNoText(x, y, value) == 1)
+        if (checkAllRulesNoText(i, j, value) == 1)
         {
-            gameField[x][y] = value;
-            if(fillRemaining(x, y + 1) == 1){
+            gameField[i][j] = value;
+            if(fillRemaining(i, j+1) == 1){
                 return 1;
             }
-            gameField[x][y] = 0;
+            gameField[i][j] = 0;
         }
     }
     return 0;
@@ -163,7 +161,6 @@ void fillBox(int row, int column){
     }
 }
 
-//Fills the Diagonal from Top Left to Bottom Right
 void fillDiagonal(){
     for (int i = 0; i < 9; i=i+3){
         fillBox(i, i);
@@ -230,7 +227,10 @@ int main() {
     int nonhiddenNumbers;
     int row;
     int inputValue;
-
+    int counter;
+    int end = 0;
+    char Amalia [6]= {'A','M','A','L','I','A'};
+    char Bloedi [7] = {'B','L','O','E','D','I','2'};
     //If incorrect input ask again
     do{
         printf("Please enter your name:");
@@ -244,7 +244,7 @@ int main() {
     setGameField(nonhiddenNumbers);
 
     //This will go one as long the game is not finished
-    while (0 == gameEnded()) {
+    while (0 == end) {
         draw(playerName);
         printf("Please enter your column then row and then your input value:\n");
         if (scanf("%c%d%d",&column,&row,&inputValue) != 2 || inputValue != '\n')
@@ -272,8 +272,38 @@ int main() {
         }else{
             printf("Incorrect Value: %d\n" ,inputValue);
         }
+        end = gameEnded();
     }
 
+
+    //Amalia's Teil
+    for (int i = 0; i <= LEN(Amalia); i++){
+        if(toupper(playerName[i])==Amalia[i]){
+            counter++;
+        }
+        if(counter == LEN(Amalia)){
+            printf("Ich hoffe du hattest Spass! Und eine Ueberaschung wird auf dich warten!");
+            break;
+        }
+    }
+    counter = 0;
+    printf("%d", LEN(Bloedi));
+    for (int i = 0; i <= LEN(Bloedi); i++){
+        if(toupper(playerName[i])==Bloedi[i]){
+            counter++;
+        }
+        if(counter == LEN(Bloedi)){
+            printf("Diese Zeiten damals waren schön! Als wir bis spät in die Nacht geredet sowie gelacht haben!\n"
+                   "Über alle möglichen Dinge. Die dummen Name die wir uns gegeben haben werde ich nie vergessen\n"
+                   "Jedes mal als ich mich auf den Weg zu dir gemacht habe, schoss mein Herz mir in den Kopf\n"
+                   "Ich konnte es kaum abwarten meine Liebste in den Armen zu halten. Jedes mal als ich auf deinem Schoss\n"
+                   "lag habe ich mich einmal geborgt und geliebt gefühlt.\n"
+                   "Aber ich möchte dir hiermit sagen, dass ich ich bei jeder Sache in deinem Leben unterstützen will egal was es sei!\n"
+                   "Ich möchte einfach, dass es dir gut geht!\n\n"
+                   "Written by your Bloedi<3\n"
+                   "Ich würde sogerne mit dir dieses hier Durchleben (Weisswein x Sprite!)\n");
+        }
+    }
     printf("Game Finished");
     system("pause");
     return 0;
