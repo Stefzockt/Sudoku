@@ -8,18 +8,16 @@
 #define LEN(array) (sizeof(array)/sizeof(array[0])) //This gets us the Length of any Array we put in
 
 //Globals
-int gameField[9][9];
+int gameField[9][9] = {0};
 static char alphabet[9] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'};
 
-//Generates a random Number between 1-9
-
+//Generates a random Number between 1-81
 int randomGenerator81(){
-    srand(time(NULL));
     return (rand() % 81) + 1;
 }
 
+//Generates a random Number between 1-9
 int randomGenerator(){
-    srand(time(NULL));
     return (rand() % 9) + 1;
 }
 
@@ -89,14 +87,9 @@ void removeKNumbers(int nonhiddennumbers){
     {
         int cellId = randomGenerator81();
 
-        // System.out.println(cellId);
-        // extract coordinates i  and j
-        int x = (cellId/9);
+        int x = cellId/9;
         int y = cellId%9;
-        if (y != 0)
-            y = y - 1;
 
-        // System.out.println(i+" "+j);
         if (gameField[x][y] != 0)
         {
             count--;
@@ -179,11 +172,6 @@ void generateSudoku(int nonhiddennumbers) {
 
 //Fills the gameField Array with 0
 void setGameField(int nonhiddennumbers) {
-    for (int x =0;x <= 9; x++) {
-        for(int y =0; y<=9; y++){
-            gameField[x][y] = 0;
-        }
-    }
     generateSudoku(nonhiddennumbers);
 }
 
@@ -227,6 +215,7 @@ int gameEnded() {
 int main() {
     char playerName[20];
     char column;
+    srand(time(NULL));
     int nonhiddenNumbers;
     int row;
     int inputValue;
@@ -245,6 +234,7 @@ int main() {
 
     //This will go one as long the game is not finished
     while (0 == gameEnded()) {
+        system("clear");
         draw(playerName);
         printf("Please enter your column then row and then your input value:\n");
         if (scanf("%c%d%d",&column,&row,&inputValue) != 2 || inputValue != '\n')
@@ -274,7 +264,7 @@ int main() {
         }
     }
 
-    printf("Game Finished");
+    printf("Game Finished\n");
     system("pause");
     return 0;
 }
